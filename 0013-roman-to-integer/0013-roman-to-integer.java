@@ -1,22 +1,24 @@
 class Solution {
     public int romanToInt(String s) {
-        int[] res = new int[s.length()];
-        for(int i=0; i<s.length(); i++) {
-            char alpha = s.charAt(i);
-            res[i] = getNumberic(alpha);
-        }
-
         int ans = 0;
-        for(int i=0; i<res.length; i++) {
-            if((i+1)<res.length && res[i+1] > res[i]) {
-                ans += res[i+1] - res[i];
-                i++;
+        
+        int res1=0, res2=0;
+        for(int i=0; i<s.length(); i++) {
+            if(i+1 < s.length()) {
+                res1 = getNumberic(s.charAt(i));
+                res2 = getNumberic(s.charAt(i+1));
+                
+                if(res2 > res1) {
+                    ans += (res2 - res1);
+                    i++;
+                } else {
+                    ans += res1;
+                }
+            } else {
+                ans += getNumberic(s.charAt(i));
             }
-            else {
-                ans += res[i];
-            }
+            
         }
-
 
         return ans;
     }
